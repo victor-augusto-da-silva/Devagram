@@ -1,4 +1,6 @@
 import  mongoose,{ Schema, mongo } from "mongoose";
+
+
 const usuarioSchema  = new Schema ({
     nome : {type: String, required: true},
     email : {type: String, required: true},
@@ -11,4 +13,4 @@ const usuarioSchema  = new Schema ({
  //verifica se a tabela existe
 export const UsuarioModel = (mongoose.models.usuarios ||
     mongoose.model('usuarios', usuarioSchema)
-)
+);
