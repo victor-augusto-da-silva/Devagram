@@ -1,6 +1,6 @@
 // cadastro.ts
-
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { conectarMongoDB} from '../../middlewares/conectarMongoDB';
 import type { RespostaPadraoMsg } from '../../types/RespostaPadraoMsg';
 import type { CadastroRequisicao } from '../../types/CadastroRequisicao';
 import { UsuarioModel } from '../../Models/UsuarioModel';
@@ -23,5 +23,6 @@ const endpointCadastro = async (req: NextApiRequest, res: NextApiResponse<Respos
     }
     return res.status(405).json({ erro: 'Método informado não é válido' });
 };
-
-export default endpointCadastro;
+//primeiro conecta depois roda o endpoint
+export default conectarMongoDB(endpointCadastro);
+ 
