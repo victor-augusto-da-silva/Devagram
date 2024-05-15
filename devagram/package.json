@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "i": "^0.3.7",
+    "md5": "^2.3.0",
+    "mdf": "^1.3.0",
     "mongodb": "^6.6.1",
     "mongoose": "^8.3.4",
     "next": "14.2.3",
@@ -17,6 +19,7 @@
     "react-dom": "^18"
   },
   "devDependencies": {
+    "@types/md5": "^2.3.5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
