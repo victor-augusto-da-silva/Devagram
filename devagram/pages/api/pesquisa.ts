@@ -9,22 +9,40 @@ const pesquisaEndPoint = async(req: NextApiRequest,
     try{
         if(req.method === 'GET'){
 
-            const {filtro} = req.query;
-            // busca pelo nome,e-mail...etc
-            //ira percorrer todos os campos
-            if(!filtro || filtro.length <2 )
-                {
-                    return res.status(400).json({erro: 'Favor informar pelo menos 2 caracteres para busca'});
+            if(req?.query?.id){
 
+                const usuariosEncontrado = await UsuarioModel.findById(req?.query?.id)
+                if(!usuariosEncontrado){
+                    return res.status(400).json({erro: 'Usuario não encontrado'});
+     
                 }
-                const usuariosEncontrados = await UsuarioModel.find({
-                   // faz com que não fique case sensitive
-                   // o i é de ignore case (busca indiferente do case sensitive)
-                    $or: [{nome: {$regex: filtro , $options : 'i'}},
-                        {email: {$regex: filtro , $options : 'i'}}]
-                });
-            return res.status(200).json(usuariosEncontrados);
-        }
+                    usuariosEncontrado.senha = null;
+                    return res.status(200).json(usuariosEncontrado);
+                
+            }
+            else {
+                const {filtro} = req.query;
+                // busca pelo nome,e-mail...etc
+                //ira percorrer todos os campos
+                if(!filtro || filtro.length <2 )
+                    {
+                        return res.status(400).json({erro: 'Favor informar pelo menos 2 caracteres para busca'});
+    
+                    }
+                    const usuariosEncontrados = await UsuarioModel.find({
+                       // faz com que não fique case sensitive
+                       // o i é de ignore case (busca indiferente do case sensitive)
+                        $or: [{nome: {$regex: filtro , $options : 'i'}},
+                            {email: {$regex: filtro , $options : 'i'}}]
+                    });
+                return res.status(200).json(usuariosEncontrados);
+            }
+
+
+            }
+
+
+         
         return res.status(405).json({erro : 'Metodo informado não é valido' })
     }   
 
