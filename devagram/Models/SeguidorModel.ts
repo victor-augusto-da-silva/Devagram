@@ -10,4 +10,4 @@ const SeguidorSchema = new Schema({
 
 export const SeguidorModel =
  (mongoose.models.seguidores || 
-    mongoose.model('seguidores', SeguidorSchema))
+    mongoose.model('seguidores', SeguidorSchema));

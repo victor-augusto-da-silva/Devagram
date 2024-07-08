@@ -15,11 +15,14 @@ const upload = multer({ storage: storage });
 
 const uploadImagemCosmic = async (req: any) => {
   if (req?.file?.originalname) {
+    const fileName = req.file.originalname.toLowerCase();
+    console.log("Nome do arquivo:", fileName);
     if (
-      !req.file.originalname.includes(".png") &&
-      !req.file.originalname.includes(".jpg") &&
-      !req.file.originalname.includes(".jpeg")
+      !fileName.includes(".png") &&
+      !fileName.includes(".jpg") &&
+      !fileName.includes(".jpeg")
     ) {
+      console.error("Extensão da imagem inválida:", fileName);
       throw new Error("Extensão da imagem inválida");
     }
     const media_object = {
@@ -37,7 +40,10 @@ const uploadImagemCosmic = async (req: any) => {
         media: media_object,
         folder: "avatar",
       });
-    } 
+    }
+  } else {
+    console.error("Arquivo não encontrado na requisição");
+    throw new Error("Arquivo não encontrado na requisição");
   }
 };
 
