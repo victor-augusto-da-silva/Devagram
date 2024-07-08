@@ -40,8 +40,11 @@ const handler = nc()
 
       await PublicacaoModel.create(publicacao);
 
-      // Incrementa o número de publicações do usuário
-      usuario.publicacoes = (usuario.publicacoes || 0) + 1;
+      // Contar todas as publicações existentes do usuário
+      const totalPublicacoes = await PublicacaoModel.countDocuments({ idUsuario: usuario._id });
+
+      // Atualizar o campo de publicações do usuário
+      usuario.publicacoes = totalPublicacoes;
       await usuario.save();
 
       return res.status(200).json({ msg: 'Publicado com sucesso' });
