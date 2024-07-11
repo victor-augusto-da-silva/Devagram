@@ -38,13 +38,15 @@ const handler = nc()
         data: new Date()
       };
 
-      await PublicacaoModel.create(publicacao);
+      usuario.publicacoes ++;
+      await UsuarioModel.findByIdAndUpdate({_id : usuario._id},usuario);
+    //  await PublicacaoModel.create(publicacao);
 
       // Contar todas as publicações existentes do usuário
-      const totalPublicacoes = await PublicacaoModel.countDocuments({ idUsuario: usuario._id });
+   //   const totalPublicacoes = await PublicacaoModel.countDocuments({ idUsuario: usuario._id });
 
       // Atualizar o campo de publicações do usuário
-      usuario.publicacoes = totalPublicacoes;
+    //  usuario.publicacoes = totalPublicacoes;
       await usuario.save();
 
       return res.status(200).json({ msg: 'Publicado com sucesso' });
