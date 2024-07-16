@@ -9,13 +9,11 @@ import { pathToFileURL } from 'url';
 export const politicaCORS = (hander : NextApiHandler ) => 
     async(req : NextApiRequest , res: NextApiResponse<RespostaPadraoMsg>) =>{
         try{
-
             await NextCors(req,res,{
                     origin : '*',
                     methods : ['GET','POST','PUT'],
                     //Navegadores antigos dão problema com o 204 (No Content)
-                    optionSuccessStatus : 200,
-                    
+                    optionSuccessStatus : 200,    
             });
             
             return hander(req,res);

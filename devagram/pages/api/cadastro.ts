@@ -8,6 +8,7 @@ import multer from 'multer';
 import { createBucketClient } from "@cosmicjs/sdk";
 import nc from 'next-connect';
 import { upload, uploadImagemCosmic } from '../../Services/uploadImagemCosmic';
+import { politicaCORS } from '../../middlewares/politicaCORS';
 
 const handler = nc()
   .use(upload.single("file"))
@@ -68,5 +69,5 @@ export const config = {
   },
 };
 
-export default conectarMongoDB(handler);
+export default  politicaCORS ( conectarMongoDB(handler) );
 export { upload, uploadImagemCosmic };

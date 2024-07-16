@@ -5,6 +5,7 @@ import md5 from 'md5';
 import { UsuarioModel } from '../../Models/UsuarioModel';
 import jwt from 'jsonwebtoken';
 import {loginResposta} from '../../types/LoginResposta'
+import { politicaCORS } from '../../middlewares/politicaCORS';
 
 const endpointLogin = async (
     req: NextApiRequest,
@@ -35,4 +36,4 @@ const endpointLogin = async (
     return res.status(400).json({ erro: 'Usuário ou senha inválidos' });
 };
 
-export default conectarMongoDB(endpointLogin);
+export default  politicaCORS(  conectarMongoDB(endpointLogin) );
