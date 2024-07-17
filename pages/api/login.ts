@@ -18,6 +18,7 @@ const endpointLogin = async (
     const MINHA_CHAVE_JWT = process.env.MINHA_CHAVE_JWT;
     if (!MINHA_CHAVE_JWT) {
         return res.status(500).json({ erro: 'ENV JWT não informada' });
+        console.log('Erro de chave')
     }
 
     const { login, senha } = req.body;
